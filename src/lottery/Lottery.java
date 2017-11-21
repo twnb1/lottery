@@ -8,24 +8,29 @@ public class Lottery {
         while(true){
             Scanner sc=new Scanner(System.in);
             System.out.println("選0手動輸入 選1自動輸入");
-            int c=Integer.parseInt(sc.nextLine()); 
-            if(c == 0){
+            String c=sc.nextLine(); 
+            if(c.equals("0")){
             //////////////////////////////////////////手動輸入
                 int[] arti=new int[6];
                 int i;
                 for (i = 0; i < arti.length; i++) { 
                     System.out.println("請輸入你的彩券第" + (i+1) + "個號碼(1~49):"); 
+                    try{
                     arti[i] = Integer.parseInt(sc.nextLine()); 
-                        if(arti[i]>49 || arti[i]<1){
-                            System.out.println("超出範圍");
+                    if(arti[i]>49 || arti[i]<1){
+                        System.out.println("超出範圍");
+                        i--;
+                    }
+                    for(int l=0;l<i;l++){
+                        if(arti[i] == arti[l]){
+                            System.out.println("重複");
                             i--;
                         }
-                        for(int l=0;l<i;l++){
-                            if(arti[i] == arti[l]){
-                                System.out.println("重複");
-                                i--;
-                            }
-                        }
+                    }
+                    }catch(Exception e){
+                        System.out.println("輸入數字就好");
+                        i--;
+                    }
                 }
                 Arrays.sort(arti);
                 System.out.print("你選的號碼(由小至大排列)是:");
@@ -83,7 +88,7 @@ public class Lottery {
                 }else{
                     System.out.println("安慰獎");
                 }
-            }else if(c==1){
+            }else if(c.equals("1")){
             ////////////////////////////////////////////////////////電腦選號
                 System.out.print("\n電腦選號(由小至大排列)是:");
                 int[] array=new int[6];
@@ -157,7 +162,7 @@ public class Lottery {
                     System.out.println("安慰獎");
                 }       
             }else{
-                System.out.println("重來");
+                System.out.println("選0跟1拉");
                 continue;
             }
         }
